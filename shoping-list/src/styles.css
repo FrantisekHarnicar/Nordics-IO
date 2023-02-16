@@ -87,3 +87,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }*/
+.view-body{
+  width: 80%;
+  margin: auto;
+}

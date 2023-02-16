@@ -4,7 +4,7 @@
 
     const car = ref(null)
     const route = useRoute()
-    const {id} = route.params
+    //const {id} = route.params
 
     onBeforeMount(() => {
         // porovnanie id
