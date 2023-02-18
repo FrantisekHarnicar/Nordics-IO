@@ -12,7 +12,8 @@
                 meal: '',
                 ingredients: [],
                 measure: [],
-                link: ''
+                link: '',
+                //text: ''
             }
         },
         beforeMount(){
@@ -25,6 +26,7 @@
                     this.ingredients = this.ingredientArray("strIngredient", response.data.meals[0])
                     this.measure = this.ingredientArray("strMeasure", response.data.meals[0])
                     this.link = this.repairLink(response.data.meals[0].strYoutube)
+                    //this.text = this.addBRToText(response.data.meals[0].strInstructions)
                     console.log(this.ingredients)
                     console.log(this.measure)
 
@@ -35,14 +37,17 @@
         methods: {
             ingredientArray(type, res){
                 let data = []
-                for(let counter = 1; res[`${type}${counter}`] !== ""; counter++){
+                for(let counter = 1; res[`${type}${counter}`] !== "" && res[`${type}${counter}`] !== " " && res[`${type}${counter}`] !== null; counter++){
                     data.push(res[`${type}${counter}`])
                 }
                 return data
             },
             repairLink(link){
                 return link.replace("watch?v=","embed/")
-            }
+            },
+            /*addBRToText(text){
+                return text.replace("\r\n\r\n","")
+            }*/
         },
         
     }
@@ -50,7 +55,7 @@
 
 <template>
     <div class="container-meal">
-        <h1 class="text-6xl leading-normal mt-0 mb-2 text-stone-800 flex justify-center items-center">
+        <h1 class="text-5xl leading-normal mt-0 mb-2 text-stone-800 flex justify-center items-center">
             {{meal.strMeal}}
         </h1>
         <div class="meal-img-ingredient">
@@ -64,7 +69,7 @@
                 <div class="ingredient-ul-meal">
                     <div class="ul-row-meal">
                         <ul v-for="item in ingredients" class="item-ul-meal">
-                            <li>{{ item }}</li>
+                            <li><b>{{ item }}</b></li>
                         </ul>
                     </div>
                     <div class="ul-row-meal">

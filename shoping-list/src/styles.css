@@ -104,6 +104,7 @@ button:focus-visible {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin: 1em;
 }
 .position-img-meal{
   width: 50%;
@@ -130,12 +131,14 @@ button:focus-visible {
   width: 50%;
 }
 .text-meal{
-  width: 70%;
+  width: 80%;
   margin: auto;
   text-align: justify;
+  padding: 1em;
 }
 .video-meal{
   display: flex;
   justify-content: center;
   margin-top: 2em;
+  
 }
