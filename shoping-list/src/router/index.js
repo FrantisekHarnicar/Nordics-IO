@@ -24,6 +24,7 @@ const router = createRouter({
         },
         {
             path: "/meal/:id",
+            props:  true,
             name: "meal",
             component: MealView
         },

@@ -91,3 +91,51 @@ button:focus-visible {
   width: 80%;
   margin: auto;
 }
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+.container-meal{
+  
+}
+.meal-img-ingredient{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.position-img-meal{
+  width: 50%;
+}
+.ingredient-meal{
+  width: 50%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.ingredient-ul-meal{
+  display: flex;
+  justify-content: center;
+}
+.item-ul-meal{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.ul-row-meal{
+  margin: 1em;
+}
+.img-meal{
+  width: 50%;
+}
+.text-meal{
+  width: 70%;
+  margin: auto;
+  text-align: justify;
+}
+.video-meal{
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
