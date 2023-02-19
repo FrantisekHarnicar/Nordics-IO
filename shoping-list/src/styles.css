@@ -101,6 +101,7 @@ button:focus-visible {
   
 }
 .meal-img-ingredient{
+  position: relative;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -145,4 +146,10 @@ button:focus-visible {
   margin-top: 1em;
   margin-bottom: 1em;
   padding: 2em;
+}
+.buttons-box-meal{
+  position: absolute;
+  top: 180px;
+  right: 102%;
+  z-index: 2;
 }

@@ -17,38 +17,55 @@ export default {
             image: '',
             video: '',
             ingredients: [],
+            alfabet: ["A","B","C","D","E","F","G","H","I","J","K","L","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         }
     },
-  methods: {
-    ingredientArray: function(){
-        this.ingredients = this.meals.map((items) =>{
-            let data = []
-            for(let counter = 1; items[`strIngredient${counter}`] !== ""; counter++){
-                data.push(items[`strIngredient${counter}`])
-            }
-            return data
-        })
-        //console.log(this.meals)
+    beforeMount(){
+        axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
+            .then(
+                response => {
+                    this.meals = response.data.meals
+                    this.ingredientArray()
+                }
+                )
+            .catch(error => console.log(error))
     },
-    submit(){
-        console.log(this.searchInput)
-        axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchInput)
-        .then(
-            response => {
-                console.log(response.data.meals)
-                this.meals = response.data.meals
-                this.ingredientArray()
-                console.log(this.ingredients)
-
-            }
-            )
-        .catch(error => console.log(error))
+    methods: {
+        ingredientArray(){
+            this.ingredients = this.meals.map((items) =>{
+                let data = []
+                for(let counter = 1; items[`strIngredient${counter}`] !== "" && items[`strIngredient${counter}`] !== " " && items[`strIngredient${counter}`] !== null && counter < 54; counter++){
+                    data.push(items[`strIngredient${counter}`])
+                }
+                return data
+            })
+            //console.log(this.meals)
+        },
+        submit(){
+            console.log(this.searchInput)
+            axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchInput)
+            .then(
+                response => {
+                    this.meals = response.data.meals
+                    this.ingredientArray()
+                }
+                )
+            .catch(error => console.log(error))
+        },
+        findByLetter(letter){
+            axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=' + letter.toLowerCase())
+            .then(
+                response => {
+                    this.meals = response.data.meals
+                    this.ingredientArray()
+                }
+                )
+            .catch(error => console.log(error))
+        }
     },
-
-  },
-  components:{
-    Card
-  },
+    components:{
+        Card
+    },
 
 }
 
@@ -58,7 +75,7 @@ export default {
 <template>
     <div>
         <!--Search bar-->
-        <div class="flex items-center">
+        <div class="flex items-center mx-auto max-w-3xl sm:px-6 lg:px-8 m-5">
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
@@ -69,8 +86,15 @@ export default {
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </button>
         </div>
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-gray-800 p-3 rounded-lg flex mb-4">
+            <div v-for="letter in alfabet" >
+                <button class="focus:ring focus:ring-gray-300 hover:text-white px-2 hover:bg-gray-700 text-gray-300 text-lg font-medium rounded-md" 
+                    @click="findByLetter(letter)">{{ letter }}
+                </button>
+            </div>
+        </div>
         <!--Cards-->
-        <div class="cards">
+        <div class="xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 gap-4">
             <div v-for="(meal, index) in meals" :key="meal">
                 <Card 
                 :id="meal.idMeal"

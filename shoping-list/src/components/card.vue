@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <div  @click="router.push(`/meal/${id}`)" class="rounded border md:shadow w-full md:w-64 overflow-hidden">
+    <div  @click="router.push(`/meal/${id}`)" class="rounded border md:shadow w-full md:w-64 overflow-hidden m-5">
         <div>
             <img :src="image" :alt="name" />
         </div>

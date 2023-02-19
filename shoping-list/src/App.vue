@@ -65,8 +65,8 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
       </div>
     </DisclosurePanel>
   </Disclosure>
-  <div>
-    <RouterView class="view-body"/>
+  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pt-3">
+    <RouterView />
   </div>
 </main>
 </template>
