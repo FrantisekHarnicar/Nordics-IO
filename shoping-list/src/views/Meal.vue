@@ -13,6 +13,7 @@
                 ingredients: [],
                 measure: [],
                 link: '',
+                favouriteMeal: JSON.parse(localStorage.getItem("favourite"))
                 //text: ''
             }
         },
@@ -48,7 +49,34 @@
             /*addBRToText(text){
                 return text.replace("\r\n\r\n","")
             }*/
+            addFavourite(){
+                if(this.favouriteMeal === null){
+                    this.favouriteMeal = []
+                }
+                //console.log(JSON.stringify(this.favouriteMeal))
+                //localStorage.clear()
+                const favourite = 
+                    {
+                        id: this.meal.idMeal,
+                        name: this.meal.strMeal,
+                        image: this.meal.strMealThumb,
+                        ingredients: this.ingredients
+                    }
+                
+                this.favouriteMeal.push(favourite)
+                localStorage.setItem("favourite", JSON.stringify(this.favouriteMeal));
+                console.log(favourite)
+                console.log(this.favouriteMeal)
+            },
+            deleteFormFavourite(){
+                let index = this.favouriteMeal.findIndex(item => item.id === this.meal.idMeal)
+                if(index === -1)return
+                this.favouriteMeal.splice(index,1)
+                localStorage.setItem("favourite", JSON.stringify(this.favouriteMeal));
+            },
+            //addToCart
         },
+        
         
     }
 </script>
@@ -58,6 +86,10 @@
         <h1 class="text-5xl leading-normal mt-0 mb-2 text-stone-800 flex justify-center items-center">
             {{meal.strMeal}}
         </h1>
+        <button @click="addFavourite">Favourit</button>
+        <button @click="deleteFormFavourite">DeleteFavourit</button>
+        <button>Print</button>
+        <button>Add to cart</button>
         <div class="meal-img-ingredient">
             <div class="position-img-meal flex justify-center items-center">
                 <img class="img-meal rounded-lg" :src=meal.strMealThumb :alt=meal.strMeal />
@@ -86,8 +118,8 @@
         <div class="text-meal">
             {{ meal.strInstructions }}
         </div>
-        <div class="video-meal">
-            <iframe width="620" height="345" :src=link>
+        <div class="video-meal " >
+            <iframe width="60%" height="345" :src=link>
             </iframe>
         </div>
     </div>

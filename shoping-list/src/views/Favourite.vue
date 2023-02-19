@@ -1,9 +1,27 @@
 <script>
-export default {
-  
-}
+    import Card from "../components/card.vue"
+
+    export default {
+        data(){
+            return{
+                favourite: JSON.parse(localStorage.getItem("favourite")),
+            }
+        },
+        components: {
+            Card
+        }
+    }
 </script>
 
 <template>
-    <h1>favourite</h1>
+    <div class="gap-8 columns-4">
+        
+            <Card v-for="meal in favourite" :key="meal"
+            :id="meal.id"
+            :image="meal.image"
+            :name="meal.name"
+            :ingredients="meal.ingredients"
+            />
+        
+    </div>
 </template>
