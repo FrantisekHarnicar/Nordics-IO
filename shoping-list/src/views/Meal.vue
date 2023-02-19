@@ -13,7 +13,8 @@
                 ingredients: [],
                 measure: [],
                 link: '',
-                favouriteMeal: JSON.parse(localStorage.getItem("favourite"))
+                favouriteMeal: JSON.parse(localStorage.getItem("favourite")),
+                cart: JSON.parse(localStorage.getItem("cart"))
                 //text: ''
             }
         },
@@ -68,13 +69,25 @@
                 console.log(favourite)
                 console.log(this.favouriteMeal)
             },
-            deleteFormFavourite(){
-                let index = this.favouriteMeal.findIndex(item => item.id === this.meal.idMeal)
+            deleteFromLocalstorage(key, data){
+                let index = data.findIndex(item => item.id === this.meal.idMeal)
                 if(index === -1)return
-                this.favouriteMeal.splice(index,1)
-                localStorage.setItem("favourite", JSON.stringify(this.favouriteMeal));
+                data.splice(index,1)
+                localStorage.setItem(key, JSON.stringify(data));
             },
-            //addToCart
+            addToCart(){
+                if(this.cart === null){
+                    this.cart = []
+                }
+                const cartToAdd = 
+                    {
+                        id: this.meal.idMeal,
+                        name: this.meal.strMeal,
+                        ingredients: this.ingredients
+                    }
+                this.cart.push(cartToAdd)
+                localStorage.setItem("cart", JSON.stringify(this.cart));
+            }
         },
         
         
@@ -87,9 +100,10 @@
             {{meal.strMeal}}
         </h1>
         <button @click="addFavourite">Favourit</button>
-        <button @click="deleteFormFavourite">DeleteFavourit</button>
+        <button @click="deleteFromLocalstorage('favourite', this.favouriteMeal)">DeleteFavourit</button>
         <button>Print</button>
-        <button>Add to cart</button>
+        <button @click="addToCart">Add to cart</button>
+        <button @click="deleteFromLocalstorage('cart', this.cart)">Delete form cart</button>
         <div class="meal-img-ingredient">
             <div class="position-img-meal flex justify-center items-center">
                 <img class="img-meal rounded-lg" :src=meal.strMealThumb :alt=meal.strMeal />

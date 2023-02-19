@@ -15,13 +15,11 @@
 
 <template>
     <div class="gap-8 columns-4">
-        
-            <Card v-for="meal in favourite" :key="meal"
-            :id="meal.id"
-            :image="meal.image"
-            :name="meal.name"
-            :ingredients="meal.ingredients"
-            />
-        
+        <Card v-for="meal in favourite" :key="meal"
+        :id="meal.id"
+        :image="meal.image"
+        :name="meal.name"
+        :ingredients="meal.ingredients"
+        />
     </div>
 </template>
