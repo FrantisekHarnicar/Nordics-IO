@@ -6,8 +6,8 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
 </script>
 
 <template>
-  <main>
-  <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+  <header>
+    <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -28,7 +28,12 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
               <RouterLink active-class="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white, px-3 py-2 rounded-md text-sm font-medium" to="/">Search</RouterLink>
               <RouterLink active-class="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white, px-3 py-2 rounded-md text-sm font-medium" to="/cart">Cart</RouterLink>
               <RouterLink active-class="bg-gray-900 text-white" class="text-gray-300 hover:bg-gray-700 hover:text-white, px-3 py-2 rounded-md text-sm font-medium" to="/favourite">Favourite</RouterLink>
+            </div>
           </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div>
+            asdasdda
           </div>
         </div>
       </div>
@@ -44,9 +49,18 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
       </div>
     </DisclosurePanel>
   </Disclosure>
-  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pt-3">
+  </header>
+  <main class="bg-gray-100">
+  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pt-3 px-4 ">
     <RouterView />
   </div>
-</main>
+  </main>
+  <footer class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 Harnicar. All Rights Reserved.
+      </span>
+      <div class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+          Page visits 
+      </div>
+  </footer>
 </template>
 

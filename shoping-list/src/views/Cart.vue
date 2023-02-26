@@ -10,20 +10,6 @@ export default {
         cartStore: useStore()
     }
   },
-  methods:{
-    /*deleteIngredients(inFood, index){
-        this.cart[inFood].ingredients.splice(index,1)
-        if(this.cart[inFood].ingredients.length == 0){
-            this.deleteItem(inFood)
-        }
-        localStorage.setItem("cart", JSON.stringify(this.cart));
-
-    },
-    deleteItem(index){
-        this.cart.splice(index,1)
-        localStorage.setItem("cart", JSON.stringify(this.cart));
-    }*/
-  },
   directives: {
         print
     }
