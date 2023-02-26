@@ -1,21 +1,23 @@
 <script>
     import Card from "../components/card.vue"
+    import { useStore } from '../stores/store'
+
 
     export default {
         data(){
             return{
-                favourite: JSON.parse(localStorage.getItem("favourite")),
+                store: useStore()
             }
         },
         components: {
             Card
-        }
+        },
     }
 </script>
 
 <template>
     <div class="xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 gap-4">
-        <Card v-for="meal in favourite" :key="meal"
+        <Card v-for="meal in store.favourite" :key="meal"
         :id="meal.id"
         :image="meal.image"
         :name="meal.name"
