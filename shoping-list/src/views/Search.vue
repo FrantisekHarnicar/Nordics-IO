@@ -1,34 +1,18 @@
 <script>
-import {useRouter} from "vue-router"
 import axios from 'axios'
-import {ref} from "vue"
 import Card from "../components/card.vue"
-
 
 export default {
     data(){
         return{
             searchInput: '',
             meals: '',
-            idMeal: '',
-            nameMeal: '',
-            instruction: '',
-            measure: '',
-            image: '',
-            video: '',
             ingredients: [],
             alfabet: ["A","B","C","D","E","F","G","H","I","J","K","L","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
         }
     },
     beforeMount(){
-        axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a')
-            .then(
-                response => {
-                    this.meals = response.data.meals
-                    this.ingredientArray()
-                }
-                )
-            .catch(error => console.log(error))
+        this.findByLetter("a")
     },
     methods: {
         ingredientArray(){
@@ -40,7 +24,6 @@ export default {
                 }
                 return data
             })
-            //console.log(this.meals)
         },
         submit(){
             console.log(this.searchInput)

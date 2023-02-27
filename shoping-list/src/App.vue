@@ -2,7 +2,21 @@
 import {RouterView, RouterLink} from "vue-router"
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
+import axios from 'axios'
+import { onBeforeMount, ref } from "vue";
 
+const visits = ref(0)
+
+onBeforeMount(() => {
+  axios.get('https://api.countapi.xyz/hit/favouritemeal/c023da1b-dc7d-4a74-90bb-096a50f3cbad')
+            .then(
+                response => {
+                    console.log(response.data.value)
+                    visits.value = response.data.value
+                }
+                )
+            .catch(error => console.log(error))
+})
 </script>
 
 <template>
@@ -31,11 +45,6 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
             </div>
           </div>
         </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <div>
-            asdasdda
-          </div>
-        </div>
       </div>
     </div>
 
@@ -51,15 +60,16 @@ import { Bars3Icon,  XMarkIcon } from '@heroicons/vue/24/outline'
   </Disclosure>
   </header>
   <main class="bg-gray-100">
-  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pt-3 px-4 ">
+  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pt-3 px-4 pb-4">
     <RouterView />
   </div>
   </main>
-  <footer class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 Harnicar. All Rights Reserved.
-      </span>
-      <div class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-          Page visits 
+  <footer class="p-4 bg-white md:flex md:items-center md:justify-between md:p-6">
+      <div class="text-sm text-gray-500">
+        © 2023 Harnicar. All Rights Reserved.
+      </div>
+      <div class="items-center mt-3 text-sm text-gray-500 sm:mt-0">
+          Page visits: <b>{{ visits }}</b>
       </div>
   </footer>
 </template>

@@ -16,7 +16,7 @@
 </script>
 
 <template>
-    <div class="xl:columns-4 lg:columns-3 md:columns-2 sm:columns-1 gap-4">
+    <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8">
         <Card v-for="meal in store.favourite" :key="meal"
         :id="meal.id"
         :image="meal.image"
