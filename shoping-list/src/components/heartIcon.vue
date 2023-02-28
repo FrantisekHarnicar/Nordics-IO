@@ -1,10 +1,10 @@
 <script setup>
     defineProps([
-        'isMealFavourite',
+        'isMealFavourite'
     ])
     const emit = defineEmits([
-    'addFavourite',
-    'deleteFromFavourite'
+        'addFavourite',
+        'deleteFromFavourite'
     ])
 </script>
 

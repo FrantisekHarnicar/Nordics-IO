@@ -44,6 +44,11 @@ export const useStore = defineStore({
             if(index === -1)return
             this.favourite.splice(index,1)
             localStorage.setItem("favourite", JSON.stringify(this.favourite));
+        },
+        deleteFromCart(id){
+            let index = this.cart.findIndex(item => item.id === id)
+            if(index === -1)return
+            this.cart.splice(index,1)
         }
     }
 })

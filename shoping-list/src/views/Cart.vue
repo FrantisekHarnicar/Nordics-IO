@@ -1,13 +1,14 @@
 <script>
 import print from 'vue3-print-nb'
 import { useStore } from '../stores/store'
+import { useRouter } from 'vue-router'
 
 
 export default {
   data(){
     return{
-        /*cart: JSON.parse(localStorage.getItem("cart")),*/
-        cartStore: useStore()
+        cartStore: useStore(),
+        router: useRouter()
     }
   },
   directives: {
@@ -22,11 +23,13 @@ export default {
 <template>
     <div>
         <div v-for="(food, inFood) in cartStore.cart" :key="food">
-            <div class="flex items-center justify-between">
-                <h2 class="text-3xl leading-normal mt-0 mb-2 text-zinc-800">{{ food.name }}</h2>
+            <div @click="router.push(`/meal/${food.id}`)" class="flex items-center justify-between">
+                <h2  class="text-3xl leading-normal pt-2 mb-2 text-stone-800 font-semibold cursor-pointer hover:underline decoration-4">
+                    {{ food.name }}
+                </h2>
                 <button @click="cartStore.deleteItem(inFood)" class="flex-no-shrink bg-red-500 px-3 ml-4 py-1 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 text-white rounded-full">Delete meal</button>
             </div>
-            <div class="bg-white shadow-md hover:shodow-lg rounded-2xl meal-ingredients-cart xl:columns-5 lg:columns-4 md:columns-3 sm:columns-2 columns-1 gap-8 ">
+            <div class="bg-white shadow-md hover:shodow-lg rounded-2xl meal-ingredients-cart grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 ">
                 <div v-for="(item, index) in food.ingredients" :key="item">
                     <div class="p-3 bg-white shadow-md hover:shodow-lg rounded-2xl mb-6">
                         <div class="flex items-center justify-between">
@@ -42,12 +45,11 @@ export default {
                             </button>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
         <div>
-            <button class="flex-no-shrink bg-blue-500 px-4 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-blue-500 text-white rounded-full m-5" v-print>Print shoping list</button>
+            <button class="flex-no-shrink bg-blue-500 px-4 py-2 mt-3 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-blue-500 text-white rounded-full" v-print>Print shoping list</button>
         </div>
     </div>
 </template>
