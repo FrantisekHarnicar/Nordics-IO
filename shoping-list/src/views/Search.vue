@@ -19,14 +19,17 @@ export default {
             if(this.meals == null) return
             this.ingredients = this.meals.map((items) =>{
                 let data = []
-                for(let counter = 1; items[`strIngredient${counter}`] !== "" && items[`strIngredient${counter}`] !== " " && items[`strIngredient${counter}`] !== null && counter < 54; counter++){
+                for(let counter = 1; 
+                items[`strIngredient${counter}`] !== "" &&
+                items[`strIngredient${counter}`] !== " " &&
+                items[`strIngredient${counter}`] !== null &&
+                counter < 54; counter++){
                     data.push(items[`strIngredient${counter}`])
                 }
                 return data
             })
         },
         submit(){
-            console.log(this.searchInput)
             axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchInput)
             .then(
                 response => {
